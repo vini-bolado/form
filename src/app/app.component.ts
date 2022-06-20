@@ -1,3 +1,4 @@
+import { Usuario } from './models/usuario';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'form';
+  user: Usuario = {
+    termos: true,
+    email:'',
+    genero:'',
+    nome:'',
+    senha:'',
+    username:''
+  }
+
+
+  salvarUsuario(){
+    alert('usuario salvo com sucesso')
+    console.log(this.user)
+  }
 }
