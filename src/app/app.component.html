@@ -1,85 +1,55 @@
-<mat-toolbar color="primary">
-
-      <mat-toolbar-row>
-        <h1>cadastre-se</h1>
-      </mat-toolbar-row>
+<mat-toolbar color="basic">
+  <mat-toolbar-row>
+    <h1>FormsModule</h1>
+  </mat-toolbar-row>
 </mat-toolbar>
-
 <div class="container">
   <mat-card>
-   <mat-card-header>
-    <mat-card-title>Seus dados</mat-card-title>
-   </mat-card-header>
+    <mat-card-header>
+      <mat-card-title>Seus dados</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form action="" #dadosUsuario="ngForm" (ngSubmit)="salvarUsuario()">
+        <mat-form-field appearance="fill">
+          <mat-label>Nome</mat-label>
+          <input type="text" matInput [(ngModel)]="user.nome" name="campo-nome" required #colocaNome=""ngModel>
+          <mat-error>
+            <label>Campo Invalido</label>
+          </mat-error>
+        </mat-form-field>
 
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input type="text" matInput [(ngModel)]="user.username" name="campo-username" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput [(ngModel)]="user.email" name="campo-email" required email>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Senha</mat-label>
+          <input type="password" matInput [(ngModel)]="user.senha" name="campo-senha" required minlength="8" #colocarSenha="ngModel">
+          <mat-error>
+            <label *ngIf="colocarSenha.errors?.['required']">Esse Campo é Obrigatório</label>
+            <label *ngIf="colocarSenha.errors?.['minlength']">A senha precisa ter, no minimo 8 caracteres</label>
+          </mat-error>
+        </mat-form-field>
 
-  <mat-card-content>
+          <mat-radio-group matInput [(ngModel)]="user.genero" name="campo-genero" required>
+            <mat-radio-button value="fem">Feminino</mat-radio-button>
+            <mat-radio-button value="masc">Masculino</mat-radio-button>
+            <mat-radio-button value="outro">Outro</mat-radio-button>
+          </mat-radio-group>
 
+          <section>
+            <mat-checkbox class="example-margin" [(ngModel)]="user.termos" name="campo-termo" required>Aceitar <a href="#">Termos de condições</a></mat-checkbox>
+          </section>
 
-    <form action="" #formUsuario="ngForm" (ngSubmit)="">
-      <mat-form-field appearance="outline">
-        <mat-label>Nome</mat-label>
-        <input
-         type="name"
-         matInput [(ngModel)]="user.nome"
-          name="campo-nome"
-           required
-           #inputNome="ngModel"
-
-           >
-            <mat-error>
-              <p>Campo invalido</p>
-            </mat-error>
-
-
-
-      </mat-form-field>
-
-
-      <mat-form-field appearance="outline">
-        <mat-label>Username</mat-label>
-        <input type="user" matInput [(ngModel)]="user.username" name="campo-username" required>
-
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input type="mail" matInput [(ngModel)]="user.email" name="campo-email" required >
-
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>senha</mat-label>
-        <input type="password" matInput [(ngModel)]="user.senha" name="campo-senha" required minlength="8" #inputSenha="ngModel">
-
-        <mat-error>
-          <p *ngIf="inputSenha.getError('required')">Campo Obrigatorio</p>
-          <p *ngIf="inputSenha.errors?.['minlength']">Minimo de 8 caracteres</p>
-        </mat-error>
-
-      </mat-form-field>
-
-
-      <mat-radio-group [(ngModel)]="user.genero" required>
-        <mat-radio-button value="masc">Masculino</mat-radio-button>
-        <mat-radio-button value="femi">Feminino</mat-radio-button>
-        <mat-radio-button value="outro">Outro</mat-radio-button>
-      </mat-radio-group>
-
-
-      <section class="example-section" name="campo-genero">
-
-        <mat-checkbox [(ngModel)]="user.termos" name="input-termos" class="example-margin" required>Termos de Usuario</mat-checkbox>
-
-      </section>
-
-
-      <button type="submit" mat-raised-button color="warn" [disabled]="formUsuario.invalid">Registrar</button>
-
-
-    </form>
-
-  </mat-card-content>
-
-
+          <button type="submit" mat-raised-button color="warn" [disabled]="dadosUsuario.invalid">Enviar</button>
+      </form>
+    </mat-card-content>
   </mat-card>
 
-
 </div>
+
+<app-reactive-forms></app-reactive-forms>

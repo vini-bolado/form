@@ -1,0 +1,58 @@
+
+<mat-toolbar color="basic">
+  <mat-toolbar-row>
+      <h1>FormsReactive-Module</h1>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="container">
+  <mat-card>
+      <mat-card-header>
+          <mat-card-title>Seus dados</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <form action="" [formGroup]="formUsuario" (ngSubmit)="enviar()">
+              <mat-form-field appearance="fill">
+                  <mat-label>Nome</mat-label>
+                  <input type="text" matInput name="campo-nome" formControlName="nome">
+                  <mat-error>
+
+                  </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                  <mat-label>Username</mat-label>
+                  <input type="text" matInput formControlName="username">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                  <mat-label>Email</mat-label>
+                  <input type="email" matInput email formControlName="email">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                  <mat-label>Senha</mat-label>
+                  <input type="password" matInput formControlName="senha">
+                  <mat-error>
+                      <span *ngIf="formUsuario.get('senha')?.getError('require')">
+                        esse campo é obrigatorio
+                      </span>
+                      <span *ngIf="formUsuario.get('senha')?.getError('minlength')">
+                        Este campo deve conter min de 8 caracteres
+                      </span>
+                  </mat-error>
+              </mat-form-field>
+
+              <mat-radio-group matInput formControlName="genero">
+                  <mat-radio-button value="fem">Feminino</mat-radio-button>
+                  <mat-radio-button value="masc">Masculino</mat-radio-button>
+                  <mat-radio-button value="outro">Outro</mat-radio-button>
+              </mat-radio-group>
+
+              <section>
+                  <mat-checkbox class="example-margin" formControlName="aceitaTermo">Aceitar <a href="#">Termos de condições</a></mat-checkbox>
+              </section>
+
+              <button type="submit" mat-raised-button color="warn">Enviar</button>
+          </form>
+      </mat-card-content>
+  </mat-card>
+
+</div>
